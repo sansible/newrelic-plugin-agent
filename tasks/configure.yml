@@ -1,0 +1,22 @@
+---
+
+- name: Configure New Relic Plugin Agent
+  become: yes
+  template:
+    dest: /etc/newrelic/newrelic-plugin-agent.cfg
+    src: newrelic-plugin-agent.cfg.j2
+    mode: 0640
+    owner: "{{ sansible_newrelic_plugin_agent_user }}"
+    group: "{{ sansible_newrelic_plugin_agent_group }}"
+  when: sansible_newrelic_plugin_agent_plugin_elasticsearch_enabled == true or sansible_newrelic_plugin_agent_plugin_haproxy_enabled == true
+  notify:
+    - restart newrelic-plugin-agent
+
+- name: Start New Relic Plugin Agent
+  become: yes
+  service:
+    name: newrelic-plugin-agent
+    state: started
+  when:
+    - sansible_newrelic_plugin_agent_enabled == true
+    - sansible_newrelic_plugin_agent_start_on_boot == true

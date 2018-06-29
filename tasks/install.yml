@@ -1,0 +1,50 @@
+---
+
+- name: Install PIP
+  become: yes
+  apt:
+    name: python-pip
+
+- name: Install New Relic Plugin Agent
+  become: yes
+  pip:
+    name: newrelic-plugin-agent
+
+- name: Ensure New Relic directories exist
+  become: yes
+  file:
+    group: "{{ sansible_newrelic_plugin_agent_group }}"
+    owner: "{{ sansible_newrelic_plugin_agent_user }}"
+    state: directory
+    path: "{{ item }}"
+  with_items:
+    - /var/log/newrelic
+    - /var/run/newrelic
+    - /etc/newrelic
+
+- name: stat for New Relic Plugin Agent deb init script
+  stat:
+    path: /opt/newrelic-plugin-agent/newrelic-plugin-agent.deb
+  register: deb_init_opt
+
+- name: Install System V init script
+  become: yes
+  copy:
+    src: /opt/newrelic-plugin-agent/newrelic-plugin-agent.deb
+    dest: /etc/init.d/newrelic-plugin-agent
+    mode: 0755
+    group: "{{ sansible_newrelic_plugin_agent_group }}"
+    owner: "{{ sansible_newrelic_plugin_agent_user }}"
+    remote_src: True
+  when: deb_init_opt.stat.exists
+
+- name: Install System V init script from alternate location
+  become: yes
+  copy:
+    src: /usr/local/lib/python2.7/dist-packages/opt/newrelic-plugin-agent/newrelic-plugin-agent.deb
+    dest: /etc/init.d/newrelic-plugin-agent
+    mode: 0755
+    group: "{{ sansible_newrelic_plugin_agent_group }}"
+    owner: "{{ sansible_newrelic_plugin_agent_user }}"
+    remote_src: True
+  when: not deb_init_opt.stat.exists
