@@ -1,0 +1,10 @@
+---
+
+- name: restart newrelic-plugin-agent
+  become: yes
+  service:
+    name: newrelic-plugin-agent
+    state: restarted
+  when:
+    - sansible_newrelic_plugin_agent_enabled
+    - sansible_newrelic_plugin_agent_start_on_boot

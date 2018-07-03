@@ -1,0 +1,11 @@
+---
+
+- name: Install New Relic Plugin Agent
+  include: install.yml
+  tags:
+    - build
+
+- name: Configure New Relic Plugin Agent
+  include: configure.yml
+  tags:
+    - configure

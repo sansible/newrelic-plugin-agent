@@ -1,0 +1,33 @@
+---
+
+- name: Converge
+  hosts: all
+
+  pre_tasks:
+    - name: Install net-tools
+      become: yes
+      apt:
+        name: net-tools
+        update_cache: yes
+        cache_valid_time: 3600
+
+  roles:
+    - role: sansible.haproxy
+
+    - role: sansible.elasticsearch
+
+    - role: newrelic_plugin_agent
+      sansible_newrelic_plugin_agent_enabled: yes
+      sansible_newrelic_plugin_agent_license_key: 123456789123456789123456789123456789
+      sansible_newrelic_plugin_agent_plugin_haproxy_enabled: yes
+      sansible_newrelic_plugin_agent_plugin_haproxy_config:
+        name: haproxy-server
+        host: localhost
+        port: 80
+        path: /haproxy?stats;csv
+        scheme: http
+      sansible_newrelic_plugin_agent_plugin_elasticsearch_config:
+        name: elasticsearch-cluster
+        host: localhost
+        port: 9200
+      sansible_newrelic_plugin_agent_plugin_elasticsearch_enabled: yes
