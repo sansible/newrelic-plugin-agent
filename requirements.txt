@@ -1,2 +1,5 @@
-docker-py
+docker
+docker-compose
 molecule
+requests==2.18.1
+pyyaml==3.12

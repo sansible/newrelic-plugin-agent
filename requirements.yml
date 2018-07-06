@@ -1,10 +1,7 @@
 ---
 
 - src: sansible.users_and_groups
-  version: v2.0
+  version: v2.0.2
 
 - src: sansible.haproxy
-  version: v1.0
-
-- src: sansible.elasticsearch
-  version: v2.1
+  version: v1.0.2

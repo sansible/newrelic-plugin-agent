@@ -19,7 +19,6 @@
     path: "{{ item }}"
   with_items:
     - /var/log/newrelic
-    - /var/run/newrelic
     - /etc/newrelic
 
 - name: stat for New Relic Plugin Agent deb init script
