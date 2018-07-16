@@ -3,4 +3,9 @@
 - name: Prepare
   hosts: all
   gather_facts: false
-  tasks: []
+  tasks:
+    - name: Install lsb-release
+      become: yes
+      apt:
+        name: lsb-release
+        update_cache: yes

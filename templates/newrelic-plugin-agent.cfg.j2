@@ -7,12 +7,12 @@ Application:
 
 {% if sansible_newrelic_plugin_agent_plugin_haproxy_enabled == true %}
   haproxy:
-    {{ sansible_newrelic_plugin_agent_plugin_haproxy_config | to_yaml }}
+    {{ sansible_newrelic_plugin_agent_plugin_haproxy_config | to_nice_yaml | indent }}
 {% endif %}
 
 {% if sansible_newrelic_plugin_agent_plugin_elasticsearch_enabled == true %}
   elasticsearch:
-    {{ sansible_newrelic_plugin_agent_plugin_elasticsearch_config | to_yaml }}
+    {{ sansible_newrelic_plugin_agent_plugin_elasticsearch_config | to_nice_yaml | indent }}
 {% endif %}
 
 Daemon:

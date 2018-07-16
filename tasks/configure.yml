@@ -1,5 +1,16 @@
 ---
 
+- name: Ensure New Relic Plugin Agent run directory exists
+  become: yes
+  file:
+    group: "{{ sansible_newrelic_plugin_agent_group }}"
+    owner: "{{ sansible_newrelic_plugin_agent_user }}"
+    state: directory
+    path: /var/run/newrelic
+  when:
+    - sansible_newrelic_plugin_agent_enabled == true
+    - sansible_newrelic_plugin_agent_start_on_boot == true
+
 - name: Configure New Relic Plugin Agent
   become: yes
   template:
