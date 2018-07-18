@@ -2,7 +2,7 @@
 
 sansible_newrelic_plugin_agent_enabled: yes
 sansible_newrelic_plugin_agent_group: newrelic
-sansible_newrelic_plugin_agent_license: changeme
+sansible_newrelic_plugin_agent_license_key: changeme
 sansible_newrelic_plugin_agent_plugin_haproxy_enabled: no
 sansible_newrelic_plugin_agent_plugin_haproxy_config: ~
 sansible_newrelic_plugin_agent_plugin_elasticsearch_enabled: no
