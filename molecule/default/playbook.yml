@@ -14,7 +14,7 @@
   roles:
     - role: sansible.haproxy
 
-    # - role: sansible.elasticsearch
+    - role: sansible.nginx
 
     - role: newrelic_plugin_agent
       sansible_newrelic_plugin_agent_enabled: yes
@@ -26,3 +26,9 @@
         port: 80
         path: /haproxy?stats;csv
         scheme: http
+      sansible_newrelic_plugin_agent_plugin_nginx_enabled: yes
+      sansible_newrelic_plugin_agent_plugin_nginx_config:
+        - name: nginx-server
+          host: localhost
+          port: 80
+          path: /status

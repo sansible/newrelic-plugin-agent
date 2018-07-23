@@ -5,3 +5,6 @@
 
 - src: sansible.haproxy
   version: v1.0.2
+
+- src: sansible.nginx
+  version: v2.1.3
