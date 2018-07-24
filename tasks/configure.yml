@@ -19,7 +19,9 @@
     mode: 0640
     owner: "{{ sansible_newrelic_plugin_agent_user }}"
     group: "{{ sansible_newrelic_plugin_agent_group }}"
-  when: sansible_newrelic_plugin_agent_plugin_elasticsearch_enabled == true or sansible_newrelic_plugin_agent_plugin_haproxy_enabled == true
+  when: sansible_newrelic_plugin_agent_plugin_elasticsearch_enabled == true or
+        sansible_newrelic_plugin_agent_plugin_haproxy_enabled == true or
+        sansible_newrelic_plugin_agent_plugin_nginx_enabled == true
   notify:
     - restart newrelic-plugin-agent
 
